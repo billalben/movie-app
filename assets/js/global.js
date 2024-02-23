@@ -1,6 +1,12 @@
 "use strict";
 
-// add event on multiple elements
+/**
+ * Adds an event listener to multiple elements.
+ *
+ * @param {NodeList} elements - The elements to add the event listener to.
+ * @param {string} eventType - The type of event to listen for (e.g., 'click', 'keydown').
+ * @param {Function} callback - The function to be executed when the event is triggered.
+ */
 const addEventOnElements = (elements, eventType, callback) => {
   if (!elements) return;
   for (const elem of elements) {
@@ -9,8 +15,8 @@ const addEventOnElements = (elements, eventType, callback) => {
 };
 
 // Toggle search box in mobile device | small screen
-const searchBox = document.querySelector("[search-box]");
-const searchTogglers = document.querySelectorAll("[search-toggler]");
+const searchBox = document.querySelector("[data-search-box]");
+const searchTogglers = document.querySelectorAll("[data-search-toggler]");
 
 if (searchBox && searchTogglers) {
   addEventOnElements(searchTogglers, "click", () => {
