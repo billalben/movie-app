@@ -112,11 +112,9 @@ body {
 }
 
 /*? #REUSED STYLE */
-.search-wrapper::before {
+.search-wrapper::before,
+.load-more::before {
   content: "";
-  top: 14px;
-  right: 12px;
-  position: absolute;
   width: 20px;
   height: 20px;
   border: 3px solid var(--white);
@@ -125,7 +123,23 @@ body {
   animation: loading 500ms linear infinite;
   display: none;
 }
+.search-wrapper::before {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+}
 .search-wrapper.searching::before {
+  display: block;
+}
+.load-more {
+  background-color: var(--primary-variant);
+  margin-inline: auto;
+  margin-block: 36px 60px;
+}
+.load-more:is(:hover, :focus-visible) {
+  --primary-variant: hsla(350, 67%, 39%, 1);
+}
+.load-more.loading::before {
   display: block;
 }
 @keyframes loading {
@@ -239,7 +253,7 @@ body {
   border-radius: var(--radius-8);
 }
 .video-card {
-  background-image: url('../images/video-bg-icon.png');
+  background-image: url("../images/video-bg-icon.png");
   aspect-ratio: 16 / 9;
   flex-shrink: 0;
   max-width: 500px;
@@ -602,6 +616,17 @@ body {
 }
 
 /*? #MOVIE LIST PAGE */
+.genre-list .title-wrapper {
+  margin-bottom: 56px;
+}
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px 16px;
+}
+.genre-list :is(.movie-card, .card-banner) {
+  width: 100%;
+}
 
 /*? #SEARCH MODAL */
 
