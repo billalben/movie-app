@@ -3,6 +3,10 @@
 import { fetchDataFromServer, api_key } from "./api.js";
 
 export function sidebar() {
+  /**
+   * Fetch all genres eg: [{ "id": "128", "name": "Action"}]
+   * then change the genre formate eg: { 128: "Action" }
+   */
   const genreList = {};
 
   fetchDataFromServer(
