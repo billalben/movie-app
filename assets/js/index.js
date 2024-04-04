@@ -120,5 +120,35 @@ const heroBanner = function ({ results: movieList }) {
 
   pageContent.appendChild(banner);
 
-  // addHeroSlider();
+  addHeroSlider();
+};
+
+/**
+ * Hero Slider Functionality
+ */
+
+const addHeroSlider = function () {
+  const sliderItems = document.querySelectorAll("[data-slider-item]");
+  const sliderControls = document.querySelectorAll("[data-slider-control]");
+
+  let lastSliderItem = sliderItems[0];
+  let lastSliderControl = sliderControls[0];
+
+  lastSliderItem.classList.add("active");
+  lastSliderControl.classList.add("active");
+
+  const sliderStart = function () {
+    lastSliderItem.classList.remove("active");
+    lastSliderControl.classList.remove("active");
+
+    // this == data-slider-controls
+    // sliderItems[Number(this.getAttribute("data-slider-control"))].classList.add("active");
+    sliderItems[Number(this.dataset.sliderControl)].classList.add("active");
+    this.classList.add("active");
+
+    lastSliderItem = sliderItems[Number(this.dataset.sliderControl)];
+    lastSliderControl = this;
+  };
+
+  addEventOnElements(sliderControls, "click", sliderStart);
 };
