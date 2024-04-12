@@ -23,3 +23,8 @@ if (searchBox && searchTogglers) {
     searchBox.classList.toggle("active");
   });
 }
+
+// Store movie id in local storage when a movie card is clicked
+const getMovieDetail = function (movieId) {
+  window.localStorage.setItem("movieId", String(movieId));
+}

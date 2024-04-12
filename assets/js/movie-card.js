@@ -36,6 +36,7 @@ export const createMovieCard = function (movie) {
       href="./detail.html"
       class="card-btn"
       title="${title}"
+      onclick="getMovieDetail(${id})"
     ></a>
   `;
 
