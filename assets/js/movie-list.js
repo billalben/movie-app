@@ -3,6 +3,7 @@
 import { api_key, fetchDataFromServer } from "./api.js";
 import { sidebar } from "./sidebar.js";
 import { createMovieCard } from "./movie-card.js";
+import { search } from "./search.js";
 
 // Collecting genre name & url parameters from the localStorage
 const genreName = window.localStorage.getItem("genreName");
@@ -11,6 +12,8 @@ const urlParam = window.localStorage.getItem("urlParam");
 const pageContent = document.querySelector("[data-page-content]");
 
 sidebar();
+
+search();
 
 let currentPage = 1;
 let totalPages = 0;

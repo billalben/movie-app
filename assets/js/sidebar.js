@@ -95,13 +95,19 @@ export function sidebar() {
     const sidebarClose = document.querySelectorAll("[data-menu-close]");
     const overlay = document.querySelector("[data-overlay]");
 
-    function toggle() {
+    addEventOnElements(sidebarTogglers, "click", () => {
       sidebar.classList.toggle("active");
       sidebarBtn.classList.toggle("active");
       overlay.classList.toggle("active");
-    }
+    });
+    addEventOnElements(sidebarClose, "click", () => {
+      sidebar.classList.remove("active");
+      sidebarBtn.classList.remove("active");
+      overlay.classList.remove("active");
+    });
 
-    addEventOnElements(sidebarTogglers, "click", toggle);
-    addEventOnElements(sidebarClose, "click", toggle);
+    sidebarClose[0].addEventListener("click", () => {
+      document.querySelector("[data-search-field]").focus();
+    });
   }
 }

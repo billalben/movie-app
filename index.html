@@ -9,7 +9,7 @@
     <meta name="description" content="Tvflix is a popular movie app" />
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
 
     <!-- google font link -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,11 +20,11 @@
     />
 
     <!-- custom css link -->
-    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
     <!-- custom js link -->
-    <script src="/assets/js/global.js" defer></script>
-    <script src="/assets/js/index.js" type="module"></script>
+    <script src="assets/js/global.js" defer></script>
+    <script src="assets/js/index.js" type="module" defer></script>
   </head>
   <body>
     <!-- Header -->
@@ -46,7 +46,7 @@
             placeholder="Search any movies ..."
             autocomplete="off"
             class="search-field"
-            search-field
+            data-search-field
           />
           <img
             src="./assets/images/search.png"
@@ -91,11 +91,13 @@
       </button>
     </header>
 
-    <!-- Sidebar -->
-    <nav class="sidebar" data-sidebar></nav>
+    <main>
+      <!-- Sidebar -->
+      <nav class="sidebar" data-sidebar></nav>
 
-    <div class="overlay" data-overlay data-menu-toggler></div>
+      <div class="overlay" data-overlay data-menu-toggler></div>
 
-    <article class="container" data-page-content></article>
+      <article class="container" data-page-content></article>
+    </main>
   </body>
 </html>
