@@ -1,7 +1,7 @@
 "use strict";
 
 const imageBaseUrl = "https://image.tmdb.org/t/p/";
-const base_url = "https://tvflex-movie.netlify.app";
+const base_url = "https://my-proxy-server-da7c.onrender.com";
 // const base_url = "http://127.0.0.1:3000";
 
 const fetchDataFromServer = async (url, callback, optionalParams) => {
