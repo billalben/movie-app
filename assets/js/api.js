@@ -1,13 +1,16 @@
 "use strict";
 
-const api_key = "3745aac7a5fee377988592f74a46b3fb";
 const imageBaseUrl = "https://image.tmdb.org/t/p/";
+const base_url = "http://127.0.0.1:3000";
 
-const fetchDataFromServer = function (url, callback, optionalParams) {
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => callback(data, optionalParams))
-    .catch((error) => console.error("Error:", error));
+const fetchDataFromServer = async (url, callback, optionalParams) => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    callback(data, optionalParams);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 };
 
-export { fetchDataFromServer, api_key, imageBaseUrl };
+export { fetchDataFromServer, imageBaseUrl, base_url };

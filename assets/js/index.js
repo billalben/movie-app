@@ -1,7 +1,7 @@
 "use strict";
 
 import { sidebar } from "./sidebar.js";
-import { api_key, imageBaseUrl, fetchDataFromServer } from "./api.js";
+import { imageBaseUrl, fetchDataFromServer, base_url } from "./api.js";
 import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
 
@@ -12,20 +12,20 @@ sidebar();
 search();
 
 // Home page sections (top rated, upcoming, trending movies)
-const homePageSections = [
-  {
-    title: "Upcoming Movies",
-    path: "/movie/upcoming",
-  },
-  {
-    title: "Weekly Trending Movies",
-    path: "/trending/movie/week",
-  },
-  {
-    title: "Top rated Movies",
-    path: "/movie/top_rated",
-  },
-];
+// const homePageSections = [
+//   {
+//     title: "Upcoming Movies",
+//     path: "/movie/upcoming",
+//   },
+//   {
+//     title: "Weekly Trending Movies",
+//     path: "/trending/movie/week",
+//   },
+//   {
+//     title: "Top rated Movies",
+//     path: "/movie/top_rated",
+//   },
+// ];
 
 /**
  * Fetch all genres eg: [{ "id": "128", "name": "Action"}]
@@ -44,19 +44,17 @@ const genreList = {
   },
 };
 
-fetchDataFromServer(
-  `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`,
-  function ({ genres }) {
-    genres.forEach(({ id, name }) => {
-      genreList[id] = name;
-    });
+// `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`
 
-    fetchDataFromServer(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&page=1`,
-      heroBanner
-    );
-  }
-);
+fetchDataFromServer(`${base_url}/m/list`, function ({ genres }) {
+  genres.forEach(({ id, name }) => {
+    genreList[id] = name;
+  });
+
+  // `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&page=1`
+
+  fetchDataFromServer(`${base_url}/m/popular?page=1`, heroBanner);
+});
 
 const heroBanner = function ({ results: movieList }) {
   const banner = document.createElement("div");
@@ -143,13 +141,37 @@ const heroBanner = function ({ results: movieList }) {
   addHeroSlider();
 
   // fetch data for home page sections (top rated, upcoming, trending movies)
-  for (const { title, path } of homePageSections) {
-    fetchDataFromServer(
-      `https://api.themoviedb.org/3${path}?api_key=${api_key}&page=1`,
-      createMovieList,
-      title
-    );
-  }
+  // for (const { title, path } of homePageSections) {
+  //   fetchDataFromServer(
+  //     `https://api.themoviedb.org/3${path}?api_key=${api_key}&page=1`,
+  //     createMovieList,
+  //     title
+  //   );
+  // }
+
+  // https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}&page=1
+
+  fetchDataFromServer(
+    `${base_url}/m/upcoming?page=1`,
+    createMovieList,
+    "Upcoming Movies"
+  );
+
+  // `https://api.themoviedb.org/3/trending/movie/week?api_key=${api_key}`
+
+  fetchDataFromServer(
+    `${base_url}/m/trend-week`,
+    createMovieList,
+    "Weekly Trending Movies"
+  );
+
+  // `https://api.themoviedb.org/3/movie/top_rated?api_key=${api_key}&page=1`
+
+  fetchDataFromServer(
+    `${base_url}/m/top-rated?page=1`,
+    createMovieList,
+    "Top rated Movies"
+  );
 };
 
 /**

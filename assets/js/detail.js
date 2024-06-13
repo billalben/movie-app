@@ -1,6 +1,6 @@
 "use strict";
 
-import { api_key, fetchDataFromServer, imageBaseUrl } from "./api.js";
+import { base_url, fetchDataFromServer, imageBaseUrl } from "./api.js";
 import { sidebar } from "./sidebar.js";
 import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
@@ -49,8 +49,10 @@ const filterVideos = function (videoList) {
   );
 };
 
+// https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_to_response=casts,videos,images,releases
+
 fetchDataFromServer(
-  `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_to_response=casts,videos,images,releases`,
+  `${base_url}/m/m/${movieId}?append_to_response=casts,videos,releases`,
   function (movie) {
     const {
       backdrop_path,
@@ -150,8 +152,10 @@ fetchDataFromServer(
 
     pageContent.appendChild(movieDetail);
 
+    // `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${api_key}&page=1`,
+
     fetchDataFromServer(
-      `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${api_key}&page=1`,
+      `${base_url}/m/recommendations/${movieId}?page=1`,
       addSuggestedMovies
     );
   }

@@ -1,6 +1,6 @@
 "use strict";
 
-import { fetchDataFromServer, api_key } from "./api.js";
+import { fetchDataFromServer, base_url } from "./api.js";
 
 export function sidebar() {
   /**
@@ -9,16 +9,15 @@ export function sidebar() {
    */
   const genreList = {};
 
-  fetchDataFromServer(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`,
-    function ({ genres }) {
-      genres.forEach(({ id, name }) => {
-        genreList[id] = name;
-      });
+  // `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`
 
-      genreLink();
-    }
-  );
+  fetchDataFromServer(`${base_url}/m/list`, function ({ genres }) {
+    genres.forEach(({ id, name }) => {
+      genreList[id] = name;
+    });
+
+    genreLink();
+  });
 
   const sidebarInner = document.createElement("div");
   sidebarInner.classList.add("sidebar-inner");

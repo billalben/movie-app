@@ -1,6 +1,6 @@
 "use search";
 
-import { api_key, fetchDataFromServer } from "./api.js";
+import { base_url, fetchDataFromServer } from "./api.js";
 import { createMovieCard } from "./movie-card.js";
 
 export function search() {
@@ -26,8 +26,10 @@ export function search() {
     clearTimeout(searchTimeout);
 
     searchTimeout = setTimeout(function () {
+      // `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchField.value}&page=1&include_adult=false`
+      
       fetchDataFromServer(
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchField.value}&page=1&include_adult=false`,
+        `${base_url}/m/search?query=${searchField.value}&page=1&include_adult=false`,
         function ({ results: movieList }) {
           searchWrapper.classList.remove("searching");
           searchResultModal.classList.add("active");

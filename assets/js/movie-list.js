@@ -1,6 +1,6 @@
 "use strict";
 
-import { api_key, fetchDataFromServer } from "./api.js";
+import { base_url, fetchDataFromServer } from "./api.js";
 import { sidebar } from "./sidebar.js";
 import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
@@ -18,8 +18,10 @@ search();
 let currentPage = 1;
 let totalPages = 0;
 
+// https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&${urlParam}&page=${currentPage}
+
 fetchDataFromServer(
-  `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&${urlParam}&page=${currentPage}`,
+  `${base_url}/m/discover?${urlParam}&page=${currentPage}`,
   function ({ results: movieList, total_pages }) {
     totalPages = total_pages;
 
@@ -57,8 +59,10 @@ fetchDataFromServer(
       currentPage++;
       this.classList.add("loading");
 
+      // https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&${urlParam}&page=${currentPage}
+
       fetchDataFromServer(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&${urlParam}&page=${currentPage}`,
+        `${base_url}/m/discover?${urlParam}&page=${currentPage}`,
         ({ results: movieList }) => {
           this.classList.remove("loading"); // this refers to the load more button
 
